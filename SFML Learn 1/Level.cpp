@@ -44,6 +44,16 @@ void Level::Generate()
 				Platform plat(x, y, 4, sf::Color::Magenta);
 				plats.push_back(plat);
 			}
+			else if ((*m_level)[y][x] == 10) {
+				Platform plat(x, y, 10, sf::Color::Green);
+				plats.push_back(plat);
+			}
+			else if ((*m_level)[y][x] == 100) {
+				Player play(x, y, 100);
+				play.setColor(sf::Color::Cyan);
+				play.m_isPlayer = false;
+				enemies.push_back(play);
+			}
 				
 		}
 	}

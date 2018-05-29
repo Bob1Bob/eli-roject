@@ -26,6 +26,10 @@ int Platform::detectCollision(Player &play)
 		if ((m_xPos + (getWidth() / 2)) >= play.getXValue() + (play.getWidth() / 2)) {
 			if ((m_xPos + (getWidth() / 2)) - (play.getXValue() + (play.getWidth() / 2)) < play.getWidth() / 2 + m_width / 2 && (m_yPos + (getHeight() / 2)) - (play.getYValue() + (play.getHeight() / 2)) < play.getHeight() / 2 + m_height / 2 && play.m_movingPlatform == false) {
 				play.collideRight();
+				if (m_platformType == 100 && play.m_isPlayer == false) {
+					play.setColor(sf::Color::Transparent);
+				}
+
 				//std::cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 				return 1;
 			}
@@ -38,6 +42,9 @@ int Platform::detectCollision(Player &play)
 			if (((play.getXValue() + (play.getWidth() / 2)) - (m_xPos + (getWidth() / 2))) < play.getWidth() / 2 + m_width / 2 && (m_yPos + (getHeight() / 2)) - (play.getYValue() + (play.getHeight() / 2)) <  play.getHeight() / 2 + m_height / 2 && play.m_movingPlatform == false) {
 				play.collideLeft();
 				//std::cout << "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
+				if (m_platformType == 100 && play.m_isPlayer == false) {
+					play.setColor(sf::Color::Transparent);
+				}
 				return 1;
 			}
 			else {
@@ -65,6 +72,15 @@ int Platform::detectCollisionTop(Player & play)
 			if (m_platformType == 4) {
 				play.updateYPos(-sin(m_time * 0.5) );
 				return 2;
+			}
+			if (m_platformType == 10) {
+				return 100;
+			}
+			//ending platform
+
+			//bullet
+			if (m_platformType == 100 && play.m_isPlayer == false) {
+				play.setColor(sf::Color::Transparent);
 			}
 			else
 				return 1;

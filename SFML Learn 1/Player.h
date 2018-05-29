@@ -31,6 +31,8 @@ public:
 
 	void setJumping(bool jumpoing);
 
+	void setColor(sf::Color color);
+
 	void setHeight(float height);
 	void setWidth(float width);
 
@@ -43,6 +45,8 @@ public:
 
 	void loseHealth(float amountLost);
 	sf::Vector2f getPosition();
+
+	bool m_isPlayer = true;
 
 	bool m_movingPlatform = false;
 

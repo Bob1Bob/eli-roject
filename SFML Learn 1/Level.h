@@ -18,6 +18,7 @@ public:
 	int m_dimY = 10;
 	int(*m_level)[dimX][dimY];
 	int(*m_homeScreen)[STARTX][STARTY];
+	std::vector <Player> enemies;
 	std::vector <Platform> plats;
 };
 

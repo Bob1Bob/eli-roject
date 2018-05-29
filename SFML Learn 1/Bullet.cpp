@@ -10,6 +10,11 @@ Bullet::Bullet(float speedMultiplier, float slope, float x1, float y1, float xPo
 	m_yPos = yPos;
 	m_x1 = x1;
 	m_y1 = y1;
+	m_width = 10.0f;
+	m_height = 10.0f;
+
+
+	m_platformType = 100;
 
 	m_toLeft = toLeft;
 

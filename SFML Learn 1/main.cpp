@@ -112,6 +112,12 @@ int main() {
 					int isColliding;
 					isColliding = level->plats[i].detectCollisionTop(player);
 
+					if (isColliding == 100) {
+						std::cout << "You Win!!";
+						window.close();
+						std::cin >> isColliding;
+					}
+
 					if (isColliding == 1) {
 						player.m_movingPlatform = false;
 						detectCollision = true;
@@ -130,9 +136,9 @@ int main() {
 					isColliding = level->plats[i].detectCollisionBottom(player);
 
 					if (isColliding == true) {
-							//player.setJumping(false);
-							//detectCollision = true;
-							//std::cout << "touching";
+						//player.setJumping(false);
+						//detectCollision = true;
+						//std::cout << "touching";
 						break;
 					}
 
@@ -143,6 +149,17 @@ int main() {
 				}
 
 				player.updatePlayer(window, detectCollision);
+
+				for (int i = 0; i < level->enemies.size(); i++) {
+					for (int j = 0; j < playerWeapon.m_bullets.size(); j++) {
+						playerWeapon.m_bullets[j].detectCollision(level->enemies[i]);
+						playerWeapon.m_bullets[j].detectCollisionTop(level->enemies[i]);
+					}
+				}
+
+				for (int i = 0; i < level->enemies.size(); i++) {
+					level->enemies[i].draw(window);
+				}
 
 				if (mouse.isButtonPressed(sf::Mouse::Button::Left) && playerWeapon.getTime() > playerWeapon.getReloadSpeed()) {
 					playerWeapon.fireWeapon(mouse, player, window);

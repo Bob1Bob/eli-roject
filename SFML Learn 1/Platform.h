@@ -17,7 +17,7 @@ public:
 	bool hurtPlayer(Player &play);
 
 	~Platform();
-private:
+protected:
 	sf::Vector2f center;
 	int m_platformType;
 	float m_time = 0.0f;

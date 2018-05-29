@@ -20,7 +20,7 @@ void Player::Reset(int xPos, int yPos, float width)
 	m_speed = 0.4f;
 	m_health = 100.0f;
 	obj.setSize(sf::Vector2f(m_width, m_height));
-	obj.setPosition(sf::Vector2f((float)xPos, (float)yPos));
+	obj.setPosition(sf::Vector2f((float)m_xPos, (float)m_yPos));
 	m_healthBar.setSize(sf::Vector2f(100.0f, 50.0f));
 	m_healthBar.setPosition(sf::Vector2f(m_xPos + 100.0f, m_yPos + 100.0f));
 }
@@ -150,6 +150,11 @@ void Player::setYValue(int yPos)
 void Player::setJumping(bool jumpoing)
 {
 	isJumping = jumpoing;
+}
+
+void Player::setColor(sf::Color color)
+{
+	obj.setFillColor(color);
 }
 
 void Player::setHeight(float height)
