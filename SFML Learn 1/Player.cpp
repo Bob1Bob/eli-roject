@@ -110,6 +110,24 @@ void Player::drawHealthBar(sf::RenderWindow & window, sf::View view)
 	
 }
 
+void Player::drawCoinBar(sf::RenderWindow & window, sf::View view)
+{
+	sf::RectangleShape coin(sf::Vector2f(0.0f, 0.0f));
+
+	std::vector <sf::RectangleShape> coins;
+
+	coin.setSize(sf::Vector2f(10.0f, 10.0f));
+
+	for (int i = 0; i < m_coins; i++) {
+		coin.setPosition(sf::Vector2f((float)((view.getCenter().x - (view.getSize().x / 2.0f) + 5.0f) + ((float)i * 15.0f)), (float)((view.getCenter().y - (view.getSize().y / 2.0f) + 75.0f))));
+		coins.push_back(coin);
+	}
+	for (int i = 0; i < coins.size(); i++) {
+		window.draw(coins[i]);
+	}
+
+}
+
 
 
 int Player::getXValue()

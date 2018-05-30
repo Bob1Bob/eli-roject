@@ -36,11 +36,12 @@ int Platform::detectCollision(Player &play)
 				if (m_platformType != 9 && m_platformType != 90){
 					play.collideRight();
 				}
-				else if (m_platformType != 90){
+				else if (m_platformType != 90) {
 					m_platformType = 90;
 					play.m_coins += 1;
 					play.m_totalCoins += 1;
 					obj.setFillColor(sf::Color::Transparent);
+					obj.setPosition(sf::Vector2f(-1000.0f, -1000.0f));
 				}
 				if (m_platformType == 100 && play.m_isPlayer == false) {
 					play.setColor(sf::Color::Transparent);
@@ -56,7 +57,16 @@ int Platform::detectCollision(Player &play)
 		else {
 
 			if (((play.getXValue() + (play.getWidth() / 2)) - (m_xPos + (getWidth() / 2))) < play.getWidth() / 2 + m_width / 2 && (m_yPos + (getHeight() / 2)) - (play.getYValue() + (play.getHeight() / 2)) <  play.getHeight() / 2 + m_height / 2 && play.m_movingPlatform == false) {
-				play.collideLeft();
+				if (m_platformType != 9 && m_platformType !=90) {
+					play.collideLeft();
+				}
+				else if (m_platformType != 90) {
+					m_platformType = 90;
+					play.m_coins += 1;
+					play.m_totalCoins += 1;
+					obj.setFillColor(sf::Color::Transparent);
+					obj.setPosition(sf::Vector2f(-1000.0f, -1000.0f));
+				}
 				//std::cout << "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
 				if (m_platformType == 100 && play.m_isPlayer == false) {
 					play.setColor(sf::Color::Transparent);
@@ -88,6 +98,17 @@ int Platform::detectCollisionTop(Player & play)
 			if (m_platformType == 4) {
 				play.updateYPos(-sin(m_time * 0.5) );
 				return 2;
+			}
+			if (m_platformType == 9) {
+				m_platformType = 90;
+				play.m_coins += 1;
+				play.m_totalCoins += 1;
+				obj.setFillColor(sf::Color::Transparent);
+				obj.setPosition(sf::Vector2f(-1000.0f, -1000.0f));
+				return 0;
+			}
+			if (m_platformType == 90) {
+				return 0;
 			}
 			if (m_platformType == 10) {
 				return 100;

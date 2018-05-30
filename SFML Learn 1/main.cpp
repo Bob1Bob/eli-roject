@@ -73,7 +73,7 @@ int main() {
 	bool pause = false;
 
 	while (window.isOpen()) { //main game loop
-		float coinsRequired = pow(3, player.m_upgrades + 1);
+		float coinsRequired = pow(2, player.m_upgrades);
 		mousePos = mouse.getPosition(window);
 		clock.restart();
 		if (player.getPlayerHealth() <= 0.0f) {
@@ -197,6 +197,7 @@ int main() {
 
 			}
 			player.drawHealthBar(window, view);
+			player.drawCoinBar(window, view);
 			if (playerFiredWeapon)
 				playerWeapon.update(window);
 			

@@ -16,6 +16,7 @@ public:
 
 	void drawHealthBar(sf::RenderWindow &window, sf::View view);
 
+	void drawCoinBar(sf::RenderWindow & window, sf::View view);
 	//getters
 	int getXValue();
 	int getYValue();
