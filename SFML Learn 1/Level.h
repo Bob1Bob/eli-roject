@@ -7,7 +7,7 @@
 class Level
 {
 public:
-	Level(int(*map_data)[dimX][dimY], int width, int height);
+	Level(int(*map_data)[demoY][demoX], int width, int height);
 	Level(int(*map_data)[STARTX][STARTY], int width, int height);
 	~Level();
 
@@ -16,7 +16,7 @@ public:
 public:
 	int m_dimX = 10;
 	int m_dimY = 10;
-	int(*m_level)[dimX][dimY];
+	int(*m_level)[demoY][demoX];
 	int(*m_homeScreen)[STARTX][STARTY];
 	std::vector <Player> enemies;
 	std::vector <Platform> plats;

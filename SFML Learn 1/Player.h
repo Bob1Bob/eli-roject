@@ -50,11 +50,15 @@ public:
 
 	bool m_movingPlatform = false;
 
+	int m_coins = 0;
+	int m_totalCoins = 0;
+	int m_upgrades = 0;
+
 private:
 	float m_speed;
 	bool isJumping = false;
 	float time;
-	
+
 	float m_health = 100.0f;
 	sf::RectangleShape m_healthBar;
 };

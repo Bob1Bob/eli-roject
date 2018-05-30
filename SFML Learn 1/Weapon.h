@@ -16,12 +16,14 @@ public:
 
 	void clearBullets();
 	~Weapon();
+	float m_reloadSpeed = 25.0f;
+	float m_bonusSpeed = 0.0f;
 
 	std::vector<Bullet> m_bullets;
 private:
 	sf::Mouse m_mouse;
 	sf::Vector2f m_mousePosition;
-	float m_reloadSpeed = 25.0f;
+	
 	Player m_play;
 	float m_slope;
 	//std::vector<Bullet> m_bullets;

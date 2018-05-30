@@ -9,10 +9,10 @@
 int main() {
 	sf::RenderWindow window(sf::VideoMode(1280,720), "Window", sf::Style::Close | sf::Style::Titlebar); //defining size, name, and stles of the window
 	//sf::RectangleShape player(sf::Vector2f(100.0f, 100.0f)); // creates shape of 100 by 100
-	Player player(2, 7);
+	Player player(0, 12);
 	sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280.0f, 720.0f));
 	Level *startingScreen = new Level(&homeScreen, STARTY, STARTX);
-	Level *level = new Level(&level1, dimX, dimY);
+	Level *level = new Level(&demoLevel, demoX, demoY);
 	sf::Clock clock;
 	sf::Time refreshRate = sf::microseconds(1500);
 	sf::Mouse mouse;
@@ -73,13 +73,14 @@ int main() {
 	bool pause = false;
 
 	while (window.isOpen()) { //main game loop
+		float coinsRequired = pow(3, player.m_upgrades + 1);
 		mousePos = mouse.getPosition(window);
 		clock.restart();
 		if (player.getPlayerHealth() <= 0.0f) {
 			delete level;
 			playerWeapon.clearBullets();
-			level = new Level(&level1, dimX, dimY);
-			player.Reset(2, 7);
+			level = new Level(&demoLevel, demoX, demoY);
+			player.Reset(0, 12);
 		}
 		sf::Event evnt; //defines event
 		while(window.pollEvent(evnt)) { //when the window gets an event
@@ -103,6 +104,20 @@ int main() {
 
 			bool detectCollision = false;
 			if (pause == false) {
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1)) {
+					if (player.m_coins >= coinsRequired) {
+						playerWeapon.m_bonusSpeed += 0.25f;
+						player.m_coins -= coinsRequired;
+						player.m_upgrades += 1;
+					}
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2)) {
+					if (player.m_coins >= coinsRequired) {
+						playerWeapon.m_reloadSpeed -= 1.0f;
+						player.m_coins -= coinsRequired;
+						player.m_upgrades += 1;
+					}
+				}
 				for (int i = 0; i < level->plats.size(); i++) {
 					level->plats[i].detectCollision(player);
 					level->plats[i].hurtPlayer(player);

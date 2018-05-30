@@ -21,7 +21,7 @@ void Weapon::fireWeapon(sf::Mouse mouse, Player play, sf::RenderWindow & window)
 
 	m_slope = changeInY / changeInX;
 	
-	float speedMultiplier = abs(changeInX) / sqrt(pow(changeInY, 2) + pow(changeInX, 2));
+	float speedMultiplier = abs(changeInX) / sqrt(pow(changeInY, 2) + pow(changeInX, 2)) * (m_bonusSpeed + 1.0f);
 
 	float x1 = play.getCenter().x;
 	float y1 = play.getCenter().y;

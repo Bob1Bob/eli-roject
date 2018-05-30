@@ -8,14 +8,22 @@ Platform::Platform()
 
 Platform::Platform(int xPos, int yPos, int platformType, sf::Color color)
 {
-	m_xPos = xPos * 100.0f;
-	m_yPos = yPos * 100.0f;
-	m_width = 100.0f;
-	m_height = 100.0f;
+	if (platformType != 9) {
+		m_xPos = xPos * 100.0f;
+		m_yPos = yPos * 100.0f;
+		m_width = 100.0f;
+		m_height = 100.0f;
+	}
+	else if (platformType == 9) {
+		m_xPos = xPos * 100.0f + 25.0f;
+		m_yPos = yPos * 100.0f + 25.0f;
+		m_width = 50.0f;
+		m_height = 50.0f;
+	}
 	m_platformType = platformType;
 	obj.setFillColor(color);
-	obj.setSize(sf::Vector2f(100.0f, 100.0f));
-	obj.setPosition(sf::Vector2f((float)xPos * 100.0f, (float)yPos * 100.0f)); // sets position of platform
+	obj.setSize(sf::Vector2f(m_width, m_height));
+	obj.setPosition(sf::Vector2f(m_xPos, m_yPos)); // sets position of platform
 }
 
 int Platform::detectCollision(Player &play)
@@ -25,7 +33,15 @@ int Platform::detectCollision(Player &play)
 	if (m_yPos + (getHeight() / 2) >= play.getYValue() + (play.getHeight() / 2)){
 		if ((m_xPos + (getWidth() / 2)) >= play.getXValue() + (play.getWidth() / 2)) {
 			if ((m_xPos + (getWidth() / 2)) - (play.getXValue() + (play.getWidth() / 2)) < play.getWidth() / 2 + m_width / 2 && (m_yPos + (getHeight() / 2)) - (play.getYValue() + (play.getHeight() / 2)) < play.getHeight() / 2 + m_height / 2 && play.m_movingPlatform == false) {
-				play.collideRight();
+				if (m_platformType != 9 && m_platformType != 90){
+					play.collideRight();
+				}
+				else if (m_platformType != 90){
+					m_platformType = 90;
+					play.m_coins += 1;
+					play.m_totalCoins += 1;
+					obj.setFillColor(sf::Color::Transparent);
+				}
 				if (m_platformType == 100 && play.m_isPlayer == false) {
 					play.setColor(sf::Color::Transparent);
 				}
